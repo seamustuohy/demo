@@ -20,7 +20,7 @@ services:
       - "elasticsearch:9200"
       - "influxdb:2003"
     environment:
-      ES_URL: http://sitch-elasticsearch:9200
+      ES_URL: ${BASE_URL}:9200
       GRAPHITE_HOST: sitch-influxdb
       GRAPHITE_PORT: 2003
       SLACK_WEBHOOK: ${SLACK_WEBHOOK}
@@ -38,7 +38,7 @@ services:
     links:
       - "elasticsearch:9200"
     environment:
-      ELASTICSEARCH_URL: http://sitch-elasticsearch:9200
+      ELASTICSEARCH_URL: ${BASE_URL}:9200
     networks:
       - sitch_elk
     depends_on:
@@ -71,8 +71,8 @@ services:
       - "8443:8443"
     environment:
       SERVER_NAME: ${SERVER_NAME}
-      KIBANA_URL: http://sitch-kibana:5601
-      CHRONOGRAF_URL: http://sitch-chronograf:10000
+      KIBANA_URL: ${BASE_URL}:5601
+      CHRONOGRAF_URL: ${BASE_URL}:10000
     links:
       - "chronograf:10000"
       - "kibana:5601"
